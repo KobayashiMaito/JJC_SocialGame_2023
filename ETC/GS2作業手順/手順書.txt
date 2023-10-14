@@ -1,0 +1,4 @@
+利用開始のための手順
+https://docs.gs2.io/ja/get_start/
+
+Failed to resolve packages: An operation that requires exclusive access to a resource ([C:/work/JJC_SocialGame_2023/Packages]) is already running and must be completed before another can be started.. No packages loaded.
