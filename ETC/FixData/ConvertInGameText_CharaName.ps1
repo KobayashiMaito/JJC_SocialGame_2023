@@ -2,8 +2,8 @@ $scriptPath = Get-Location
 $excelFileName = "InGameText.xlsm"
 $excelFunctionName = "OutputCharaName"
 $excelPath = Join-Path $scriptPath $excelFileName
-$outputDirectoryPath = Join-Path $scriptPath "..\1_Output_Temp"
-$assetPath = Join-Path $scriptPath "..\..\..\Assets\Resources\FixData"
+$outputDirectoryPath = Join-Path $scriptPath "\1_Output_Temp"
+$assetPath = Join-Path $scriptPath "..\..\Assets\Resources\FixData"
 if(Test-Path $excelPath){
     $writeString = $excelFileName + "ÇÃä÷êî" + $excelFunctionName + "ÇåƒÇ—èoÇµÇƒÇ¢Ç‹Ç∑."
     Write-Output $writeString
