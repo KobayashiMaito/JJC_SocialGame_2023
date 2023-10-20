@@ -59,7 +59,7 @@ public class Application : MonoBehaviour
             {
                 if (S._fixDataManager == null)
                 {
-                    S._fixDataManager = new FixDataManager();
+                    S._fixDataManager = S.gameObject.AddComponent<FixDataManager>();
                 }
                 return S._fixDataManager;
             }

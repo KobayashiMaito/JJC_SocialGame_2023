@@ -7,7 +7,7 @@ public class FixDataManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        fixData_charaFixData.Load();
     }
 
     // Update is called once per frame
