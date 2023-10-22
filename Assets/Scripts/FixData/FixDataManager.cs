@@ -5,7 +5,7 @@ using UnityEngine;
 public class FixDataManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         fixData_charaFixData = new FixData_CharaFixData();
         fixData_charaFixData.Load();              
@@ -22,10 +22,17 @@ public class FixDataManager : MonoBehaviour
         
     }
 
+    public string GetCharaName(DefineParam.CHARA_ID charaId){
+        return GetCharaName((int)charaId);
+    }
     public string GetCharaName(int charaId){
         return inGameText_charaName.GetCharaName(charaId);
     }
 
+
+    public string GetCharaImagePath(DefineParam.CHARA_ID charaId){
+        return GetCharaImagePath((int)charaId);
+    }
     public string GetCharaImagePath(int charaId){
         return fixData_charaFixData.GetFixData(charaId).imagePath;
     }    

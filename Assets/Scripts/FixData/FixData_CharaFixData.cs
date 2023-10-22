@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class FixData_CharaFixData : MonoBehaviour
+public class FixData_CharaFixData
 {
     public void Load()
     {

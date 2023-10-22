@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class AppSceneManager : MonoBehaviour
 {
@@ -11,9 +12,12 @@ public class AppSceneManager : MonoBehaviour
     public DefineParam.SCENARIO_ID currentScenarioId;
     public DefineParam.CHARA_ID currentCharaId;
 
+    UnityAction scenarioPopOutCallbackFunc;
+
     void Awake(){
         currentScenarioId = DefineParam.SCENARIO_ID.SCENARIO_INVALID;
         currentCharaId = DefineParam.CHARA_ID.CHARA_INVALID;
+        scenarioPopOutCallbackFunc = TestFunc;
     }
 
     // Start is called before the first frame update
@@ -40,6 +44,15 @@ public class AppSceneManager : MonoBehaviour
         currentSceneId = sceneId;
 
         FadeManager.ChangeScene(sceneId.ToString());
+    }
+
+    public UnityAction GetScenarioPopOutCallbackFunc(){
+        return scenarioPopOutCallbackFunc;
+    }
+
+    public void TestFunc(){
+        Debug.Log("シナリオが終わったよ");
+        ChangeScene(DefineParam.SCENE_ID.Lobby);
     }
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)

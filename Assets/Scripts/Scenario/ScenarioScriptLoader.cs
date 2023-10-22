@@ -4,18 +4,23 @@ using UnityEngine;
 using System.IO;
 
 public class ScenarioScriptLoader : MonoBehaviour
-{/*
+{
     void Awake(){
-        m_scenarioId = SceneChangeManager.Instance.GetScenarioId();
-        LoadScript();
+        scenarioId = Application.appSceneManager.GetScenarioId();
+
+        if(scenarioId == DefineParam.SCENARIO_ID.SCENARIO_INVALID){
+            scenarioId = debugPlayScenarioId;
+        }
+
+        LoadScript();        
     }
 
     void Start(){
-        
+
     }
 
     private void LoadScript(){
-        string path = "ScenarioScript/SC" + m_scenarioId.ToString("000");
+        string path = "FixData/Scenario/Scenario" + ((int)scenarioId).ToString("000") + ".xlsm_Scenario";
 
         TextAsset csvFile;
         m_scenarioScriptRowList = new List<ScenarioScriptRow>();
@@ -27,22 +32,17 @@ public class ScenarioScriptLoader : MonoBehaviour
         {
             ScenarioScriptRow currentRow = new ScenarioScriptRow();
             string line = reader.ReadLine();
-            currentRow.m_rawText = line;
+            currentRow.rawText = line;
 
             string[] lineArray = line.Split(',');
-            char rawTextFirstChar = lineArray[0][0];
-            if(rawTextFirstChar == '@'){
-                currentRow.m_commandStr = lineArray[0];
-            }else{
-                currentRow.m_commandStr = "";
-            }
-
+            currentRow.charaId = (DefineParam.CHARA_ID)(int.Parse(lineArray[0]));
+            currentRow.charaTalkText = lineArray[1];
             m_scenarioScriptRowList.Add(currentRow);
         }
     }
 
     void PrintDebugLog(ScenarioScriptRow row){
-        Debug.Log(row.m_rawText);
+        Debug.Log(row.rawText);
     }
 
     public ScenarioScriptRow GetScenarioScriptRow(int rowIndex){
@@ -61,10 +61,13 @@ public class ScenarioScriptLoader : MonoBehaviour
     }
 
     public struct ScenarioScriptRow{
-        public string m_commandStr;
-        public string m_rawText; // 生テキスト.
+        public string rawText; // 生テキスト.
+        public DefineParam.CHARA_ID charaId;
+        public string charaTalkText;
     }
 
-    public int m_scenarioId;
-    List<ScenarioScriptRow> m_scenarioScriptRowList = null;*/
+    DefineParam.SCENARIO_ID scenarioId;
+    List<ScenarioScriptRow> m_scenarioScriptRowList = null;
+
+    public DefineParam.SCENARIO_ID debugPlayScenarioId;
 }

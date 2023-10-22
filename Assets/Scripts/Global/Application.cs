@@ -84,6 +84,23 @@ public class Application : MonoBehaviour
         }
     }    
 
+    private UserDataManager _userDataManager;
+    static public UserDataManager userDataManager
+    {
+        get
+        {
+            if (S != null)
+            {
+                if (S._userDataManager == null)
+                {
+                    S._userDataManager = S.gameObject.AddComponent<UserDataManager>();
+                }
+                return S._userDataManager;
+            }
+            return null;
+        }
+    }   
+
     static public bool IsEnableUIControl()
     {
         if (FadeManager.IsFading())

@@ -21,6 +21,7 @@ public class DefineParam : MonoBehaviour
         SCENARIO013,
         SCENARIO014,
         SCENARIO015,
+        SCENARIO016,
 
         SCENARIO300=300,
     }
