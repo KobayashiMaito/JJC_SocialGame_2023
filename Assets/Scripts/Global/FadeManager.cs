@@ -87,12 +87,10 @@ public class FadeManager : MonoBehaviour {
             case E_FADE_STATE.eFADE_OUT:
                 fRatio = m_pCallbackTimer.GetRate();
                 fRatio = fRatio * fRatio;
-                Debug.Log("FadeOut " + fRatio.ToString() );
                 break;
             case E_FADE_STATE.eFADE_IN:
                 fRatio = 1.0f - m_pCallbackTimer.GetRate();
                 fRatio = fRatio * fRatio;
-                Debug.Log("FadeIn " + fRatio.ToString());
                 break;
             default:
                 break;

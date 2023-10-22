@@ -67,6 +67,23 @@ public class Application : MonoBehaviour
         }
     }
 
+    private AppSceneManager _appSceneManager;
+    static public AppSceneManager appSceneManager
+    {
+        get
+        {
+            if (S != null)
+            {
+                if (S._appSceneManager == null)
+                {
+                    S._appSceneManager = S.gameObject.AddComponent<AppSceneManager>();
+                }
+                return S._appSceneManager;
+            }
+            return null;
+        }
+    }    
+
     static public bool IsEnableUIControl()
     {
         if (FadeManager.IsFading())

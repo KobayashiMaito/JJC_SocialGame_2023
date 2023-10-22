@@ -7,90 +7,50 @@ public class InGameText_CharaName
 {
     public void Load()
     {
-        string path = "Fix/InGameText.xlsm_CharaName";
+        string path = "FixData/InGameText.xlsm_CharaName";
 
         TextAsset csvFile;
-        m_fixActorDataList = new List<FixActorData>();
+        m_fixDataList = new List<CharaName>();
 
         {
             csvFile = Resources.Load<TextAsset>(path);
             StringReader reader = new StringReader(csvFile.text);
-
-            int id = 0;
 
             while (reader.Peek() != -1)
             {
                 string line = reader.ReadLine();
                 string[] lineArray = line.Split(',');
 
-                FixActorData currentRow = new FixActorData();
-                currentRow.m_id = id;
-                currentRow.m_name = lineArray[0];
+                CharaName currentRow = new CharaName();
+                currentRow.id = int.Parse(lineArray[0]);
+                currentRow.name = lineArray[1];
 
-                m_fixActorDataList.Add(currentRow);
-
-                id++;
-            }
-        }
-
-        path = "Fix/会話アクターリソース";
-        int FixDataNum = GetFixNum();
-        {
-            csvFile = Resources.Load<TextAsset>(path);
-            StringReader reader = new StringReader(csvFile.text);
-
-            int id = 0;
-
-            while (reader.Peek() != -1)
-            {
-                if (id >= FixDataNum)
-                {
-                    Debug.Assert(false, "会話アクターリソース.csvの行が多すぎる");
-                    break;
-                }
-
-                string line = reader.ReadLine();
-                string[] lineArray = line.Split(',');
-
-                m_fixActorDataList[id].m_normalPath = lineArray[0];
-                m_fixActorDataList[id].m_joyPath = lineArray[1];
-                m_fixActorDataList[id].m_dashPath = lineArray[2];
-
-                id++;
-            }
-
-            if (id < FixDataNum)
-            {
-                Debug.Assert(false, "会話アクターリソース.csvの行が少なすぎる");
+                m_fixDataList.Add(currentRow);
             }
         }
     }
 
-    public FixActorData GetFixData(int actorId)
+    public string GetCharaName(int charaId)
     {
-        if (actorId >= GetFixNum())
+        if (IsValidId(charaId))
         {
-            return null;
+            return m_fixDataList[charaId].name;
         }
-        return m_fixActorDataList[actorId];
+        return "";
+    }
+
+    public CharaName GetFixData(int charaId)
+    {
+        if (IsValidId(charaId))
+        {
+            return m_fixDataList[charaId];
+        }        
+        return null;
     }
 
     public int GetFixNum()
     {
-        return m_fixActorDataList.Count;
-    }
-
-    public int GetActorIdFromActorName(string actorName)
-    {
-        for (int i = 0; i < GetFixNum(); i++)
-        {
-            FixActorData data = GetFixData(i);
-            if (data.m_name.Equals(actorName))
-            {
-                return i;
-            }
-        }
-        return INVALID_ID;
+        return m_fixDataList.Count;
     }
 
     public bool IsValidId(int Id)
@@ -102,18 +62,18 @@ public class InGameText_CharaName
     {
         for (int i = 0; i < GetFixNum(); i++)
         {
-            FixActorData data = GetFixData(i);
-            Debug.Log(data.m_id + "," + data.m_name + "," + data.m_normalPath + "," + data.m_joyPath + "," + data.m_dashPath);
+            CharaName data = GetFixData(i);
+            Debug.Log(data.id + "," + data.name);
         }
     }
 
     public class CharaName
     {
-        public int m_id;
-        public string m_name;
+        public int id;
+        public string name;
     }
 
-    List<CharaName> m_fixList;
+    List<CharaName> m_fixDataList;
     public const int INVALID_ID = 0;
 
 }

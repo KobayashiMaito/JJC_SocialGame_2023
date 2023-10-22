@@ -5,13 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneChangeButton : MonoBehaviour
 {
-    public enum SCENE_NAME
-    {
-        Lobby,
-        Talk
-    };
-
-    public SCENE_NAME changeSceneName;
+    public DefineParam.SCENE_ID changeSceneId;
 
     // Start is called before the first frame update
     void Start()
@@ -29,14 +23,7 @@ public class SceneChangeButton : MonoBehaviour
     {
         if (Application.IsEnableUIControl())
         {
-            FadeManager.ChangeScene(changeSceneName.ToString());
-
-            //FadeManager.ChangeState(TestFunc);
+            Application.appSceneManager.ChangeScene(changeSceneId);
         }
-    }
-
-    public void TestFunc()
-    {
-        Debug.Log("ChangeState");
     }
 }
