@@ -5,7 +5,7 @@ using UnityEngine;
 public class SceneChangeButton_Scenario : MonoBehaviour
 {
     public DefineParam.SCENE_ID changeSceneId;    
-    public DefineParam.SCENARIO_ID scenarioId;
+    public int scenarioId;
 
     public void OnClick()
     {
