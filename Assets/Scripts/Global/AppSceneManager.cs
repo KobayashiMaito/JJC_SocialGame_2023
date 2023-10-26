@@ -9,14 +9,14 @@ public class AppSceneManager : MonoBehaviour
 {
     public DefineParam.SCENE_ID currentSceneId;
 
-    public DefineParam.SCENARIO_ID currentScenarioId;
-    public DefineParam.CHARA_ID currentCharaId;
+    public int currentScenarioId;
+    public int currentCharaId;
 
     UnityAction scenarioPopOutCallbackFunc;
 
     void Awake(){
-        currentScenarioId = DefineParam.SCENARIO_ID.SCENARIO_INVALID;
-        currentCharaId = DefineParam.CHARA_ID.CHARA_INVALID;
+        currentScenarioId = DefineParam.SCENARIO_INVALID;
+        currentCharaId = DefineParam.CHARA_INVALID;
         scenarioPopOutCallbackFunc = TestFunc;
     }
 
@@ -32,11 +32,11 @@ public class AppSceneManager : MonoBehaviour
         
     }
 
-    public void SetScenarioId(DefineParam.SCENARIO_ID scenarioId){
+    public void SetScenarioId(int scenarioId){
         currentScenarioId = scenarioId;
     }
 
-    public DefineParam.SCENARIO_ID GetScenarioId(){
+    public int GetScenarioId(){
         return currentScenarioId;
     }    
 
