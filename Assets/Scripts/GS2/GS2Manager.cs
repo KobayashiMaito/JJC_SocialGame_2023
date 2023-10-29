@@ -33,9 +33,16 @@ public class GS2Manager : MonoBehaviour
     string password;
     bool isCompleteLogin;
 
+    bool[] hasCharaFlag;
+
     private void Awake()
     {
         isCompleteLogin = false;
+        hasCharaFlag = new bool[DefineParam.CHARA_MAX_ID+1];
+        for (int i = 0; i < DefineParam.CHARA_MAX_ID+1; i++)
+        {
+            hasCharaFlag[i] = false;
+        }
     }
 
     IEnumerator Start()
@@ -170,6 +177,10 @@ public class GS2Manager : MonoBehaviour
         // Finalize GS2-SDK
         Debug.Log("ログイン完了 UserId " + user_id + " Pass " + password);
         isCompleteLogin = true;
+
+        // 最後に読んでおきたい関数.
+        RefreshList();
+
         yield return profile.Finalize();
     }
 
@@ -323,6 +334,10 @@ public class GS2Manager : MonoBehaviour
             for (int i = 0; i < items.Count; i++)
             {
                 Debug.Log(items[i].Name + "を持っている");
+
+                string numString = items[i].Name.Substring(5, 7);
+                int charaId = int.Parse(numString);
+                hasCharaFlag[charaId] = true;
             }
         }
 
@@ -332,5 +347,27 @@ public class GS2Manager : MonoBehaviour
     public bool IsCompleteLogin()
     {
         return isCompleteLogin;
+    }
+
+    public bool HasChara(int charaId)
+    {
+        if (hasCharaFlag == null)
+        {
+            return false;
+        }
+        return hasCharaFlag[charaId];
+    }
+
+    public void LocalCharaGacha()
+    {
+        int charaId = Random.Range(1, 14 + 1);
+        string exchangeName = "Exchange002_Chara" + charaId.ToString("D3");
+        Debug.Log(exchangeName);
+        StartCoroutine(ExecExchange(exchangeName));
+    }
+
+    public void ClearCharaFlag()
+    {
+        StartCoroutine(ExecExchange("Exchange002_ClearEntry"));
     }
 }
