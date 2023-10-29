@@ -141,7 +141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 917692479690708199, guid: af119c4281d657344a66f6d54f5a6926, type: 3}
       propertyPath: m_globalFadePanelColor.r
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2964035079682692205, guid: af119c4281d657344a66f6d54f5a6926, type: 3}
       propertyPath: m_LocalPosition.x

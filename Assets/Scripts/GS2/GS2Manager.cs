@@ -8,9 +8,9 @@
         {
             // Setup variables
     
-            var clientId = "YourClientId";
-            var clientSecret = "YourClientSecret";
-            var accountNamespaceName = "game-0001";
+            var clientId = "GKITg_ndOnKcFmHHmXNi3OjII7vK0tu7lTZAjbrQCTm2KWw_Qg_CMW5HGBkKVwKdgaXE_ueEXZBUI4q1NNpDUQKvQ==";
+            var clientSecret = "ezrNGluCeYhTODHwyZLlHvfmAOboPHJW";
+            var accountNamespaceName = "Player";
             var accountEncryptionKeyId = "grn:gs2:{region}:{ownerId}:key:account-encryption-key-namespace:key:account-encryption-key";
             
             // Setup general setting
