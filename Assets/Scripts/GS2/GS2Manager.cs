@@ -31,6 +31,12 @@ public class GS2Manager : MonoBehaviour
 
     string user_id;
     string password;
+    bool isCompleteLogin;
+
+    private void Awake()
+    {
+        isCompleteLogin = false;
+    }
 
     IEnumerator Start()
     {
@@ -162,11 +168,14 @@ public class GS2Manager : MonoBehaviour
         }
 
         // Finalize GS2-SDK
+        Debug.Log("ログイン完了 UserId " + user_id + " Pass " + password);
+        isCompleteLogin = true;
         yield return profile.Finalize();
     }
 
     void Update()
     {
+        /*
         if (Input.GetMouseButtonDown(0))
         {
             StartCoroutine(RefreshList());
@@ -174,6 +183,7 @@ public class GS2Manager : MonoBehaviour
         {
             StartCoroutine(ExecExchange("Exchange002_ClearEntry"));
         }
+        */
     }
 
     IEnumerator ExecExchange(string exchangeName)
@@ -317,5 +327,10 @@ public class GS2Manager : MonoBehaviour
         }
 
         yield return profile.Finalize();
+    }
+
+    public bool IsCompleteLogin()
+    {
+        return isCompleteLogin;
     }
 }
