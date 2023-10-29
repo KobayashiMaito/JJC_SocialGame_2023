@@ -6,8 +6,10 @@ Failed to resolve packages: An operation that requires exclusive access to a res
 
 マイクロサービスという単位で分かれている。
 
-GS2-Inventoryで、アイテム所持状況や、キャラクター所持状況の管理
+GS2-Inventoryで、アイテム所持状況
+GS2-Dictionaryで、キャラクター所持状況の管理
 GS2-Formationで、パーティ管理
 GS2-Moneyで、課金ポイントの管理
 
 
+Exchange001_CharaGacha001
