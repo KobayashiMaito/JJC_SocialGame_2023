@@ -11,10 +11,13 @@ public class CharaGachaManager : MonoBehaviour
     Perform_Gacha1 performGacha1;
     Perform_Gacha10 performGacha10;
 
+    int currentGachaCharaId;
+
     private void Awake()
     {
         performGacha1 = new Perform_Gacha1();
         performGacha10 = new Perform_Gacha10();
+        currentGachaCharaId = DefineParam.CHARA_INVALID;
     }
     // Start is called before the first frame update
     void Start()
@@ -31,7 +34,8 @@ public class CharaGachaManager : MonoBehaviour
 
     public void OnClickGachaButton()
     {
-        Application.gs2Manager.LocalCharaGacha();
+        currentGachaCharaId = Application.gs2Manager.LocalCharaGacha();
+        DrawPerform(currentGachaCharaId);
     }
 
     public void OnClickGacha10Button()
@@ -65,5 +69,10 @@ public class CharaGachaManager : MonoBehaviour
     public void OnClickResetCharaHasFlag()
     {
         Application.gs2Manager.ClearCharaFlag();
+    }
+
+    public int GetCurrentGachaCharaId()
+    {
+        return currentGachaCharaId;
     }
 }

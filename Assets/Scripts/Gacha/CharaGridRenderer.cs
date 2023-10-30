@@ -54,6 +54,11 @@ public class CharaGridRenderer : MonoBehaviour
         currentGridPosition = gridMenuRectTrans.anchoredPosition;
     }
 
+    public void OnClickRefreshButton()
+    {
+        StartCoroutine(Application.gs2Manager.RefreshList(RefreshGrid));
+    }
+
     virtual public void RefreshGrid()
     {
         for (int charaId = 0; charaId < GRID_NUM; charaId++)

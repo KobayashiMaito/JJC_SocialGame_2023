@@ -30,7 +30,7 @@ public class Perform_Gacha1
         EventTrigger trigger = back.GetComponent<EventTrigger>();
         EventTrigger.Entry entry = new EventTrigger.Entry();
         entry.eventID = EventTriggerType.PointerClick;
-        entry.callback.AddListener((eventDate) => { Deactivate(); });
+        entry.callback.AddListener((eventDate) => { AfterGacha(); });
         trigger.triggers.Add(entry);
 
         SetActive(false);
@@ -59,5 +59,22 @@ public class Perform_Gacha1
     public void SetSprite(Sprite inputSprite)
     {
         image.sprite = inputSprite;
+    }
+
+    private void AfterGacha()
+    {
+        int charaId = GameObject.Find("CharaGachaManager").GetComponent<CharaGachaManager>().GetCurrentGachaCharaId();
+        
+        if (Application.gs2Manager.HasChara(charaId))
+        {
+            Deactivate();
+        }
+        else
+        {
+            int scenarioId = charaId;
+            Application.appSceneManager.SetScenarioId(scenarioId);
+            Application.appSceneManager.SetScenarioPopOutSceneId(DefineParam.SCENE_ID.Gacha);
+            Application.appSceneManager.ChangeScene(DefineParam.SCENE_ID.Talk);
+        }
     }
 }

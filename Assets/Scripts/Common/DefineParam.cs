@@ -11,6 +11,7 @@ public class DefineParam : MonoBehaviour
 
     public enum SCENE_ID{
         Lobby,
-        Talk
+        Talk,
+        Gacha
     }    
 }

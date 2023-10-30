@@ -17,6 +17,7 @@ using Google.Protobuf.WellKnownTypes;
 using Unity.Properties;
 using Gs2.Core.Domain;
 using Gs2.Gs2Identifier.Model;
+using UnityEngine.Events;
 
 public class GS2Manager : MonoBehaviour
 {
@@ -178,9 +179,6 @@ public class GS2Manager : MonoBehaviour
         Debug.Log("ログイン完了 UserId " + user_id + " Pass " + password);
         isCompleteLogin = true;
 
-        // 最後に読んでおきたい関数.
-        RefreshList();
-
         yield return profile.Finalize();
     }
 
@@ -199,6 +197,7 @@ public class GS2Manager : MonoBehaviour
 
     IEnumerator ExecExchange(string exchangeName)
     {
+        Debug.Log(exchangeName + "を実施します");
         // Setup general setting
         var profile = new Profile(
             CLIENT_ID,
@@ -259,12 +258,18 @@ public class GS2Manager : MonoBehaviour
             var item = future.Result;
         }
 
+        Debug.Log(exchangeName + "が完了しました");
         yield return profile.Finalize();
     }
 
 
-    IEnumerator RefreshList()
+    public IEnumerator RefreshList(UnityAction onCompleteFunc)
     {
+        for (int i = 0; i < DefineParam.CHARA_MAX_ID + 1; i++)
+        {
+            hasCharaFlag[i] = false;
+        }
+
         // Setup general setting
         var profile = new Profile(
             CLIENT_ID,
@@ -282,8 +287,6 @@ public class GS2Manager : MonoBehaviour
         var gs2 = initializeFuture.Result;
 
         // Create anonymous account
-
-        Debug.Log("ログインをする.");
 
         var loginFuture = profile.LoginFuture(
             new Gs2AccountAuthenticator(
@@ -335,10 +338,15 @@ public class GS2Manager : MonoBehaviour
             {
                 Debug.Log(items[i].Name + "を持っている");
 
-                string numString = items[i].Name.Substring(5, 7);
+                string numString = items[i].Name.Substring(5, 3);
                 int charaId = int.Parse(numString);
                 hasCharaFlag[charaId] = true;
             }
+        }
+
+        if (onCompleteFunc != null)
+        {
+            onCompleteFunc();
         }
 
         yield return profile.Finalize();
@@ -358,12 +366,13 @@ public class GS2Manager : MonoBehaviour
         return hasCharaFlag[charaId];
     }
 
-    public void LocalCharaGacha()
+    public int LocalCharaGacha()
     {
         int charaId = Random.Range(1, 14 + 1);
         string exchangeName = "Exchange002_Chara" + charaId.ToString("D3");
         Debug.Log(exchangeName);
         StartCoroutine(ExecExchange(exchangeName));
+        return charaId;
     }
 
     public void ClearCharaFlag()

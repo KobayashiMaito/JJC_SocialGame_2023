@@ -9,6 +9,7 @@ public class CharaCell : MonoBehaviour
         nameText = this.transform.Find("CharaName").GetComponent<Text>();
         charaImage = this.transform.Find("CharaImage").GetComponent<Image>();
         notHasCover = this.transform.Find("NotHasCover").GetComponent<Image>();
+        notHasCover.color = new Color(0,0,0,0.9f);
 
         Font font = Resources.Load<Font>("Fonts/keifont");
         nameText.font = font;
