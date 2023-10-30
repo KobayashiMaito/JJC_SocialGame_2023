@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,11 +13,12 @@ public class AppSceneManager : MonoBehaviour
     public int currentCharaId;
 
     UnityAction scenarioPopOutCallbackFunc;
+    public DefineParam.SCENE_ID scenarioPopOutSceneId;
 
     void Awake(){
         currentScenarioId = DefineParam.SCENARIO_INVALID;
         currentCharaId = DefineParam.CHARA_INVALID;
-        scenarioPopOutCallbackFunc = TestFunc;
+        scenarioPopOutCallbackFunc = ScenarioPopOut;
     }
 
     // Start is called before the first frame update
@@ -50,13 +51,18 @@ public class AppSceneManager : MonoBehaviour
         return scenarioPopOutCallbackFunc;
     }
 
-    public void TestFunc(){
+    public void ScenarioPopOut(){
         Debug.Log("シナリオが終わったよ");
-        ChangeScene(DefineParam.SCENE_ID.Lobby);
+        ChangeScene(scenarioPopOutSceneId);
     }
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         
-    }    
+    }
+
+    public void SetScenarioPopOutSceneId(DefineParam.SCENE_ID inputSceneId)
+    {
+        scenarioPopOutSceneId = inputSceneId;
+    }
 }
